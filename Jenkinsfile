@@ -25,6 +25,8 @@ pipeline {
 				./venv/bin/activate
 				pip3 install -r requirements.txt
 				python3 lbg.test.py
+    				docker-compose down
+				docker-compose up -d
 				python3 -m behave ./features/restapp.feature
 				'''
 			}
