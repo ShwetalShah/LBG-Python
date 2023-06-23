@@ -2,7 +2,7 @@ pipeline {
 	agent any
 	
 	environment {
-		version = "1"
+		version = "v1"
 		PORT = "9000"
 	}
 
