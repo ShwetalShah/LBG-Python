@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  lbg-sample:
+    image: lbg-sample:${version}
+    build: .
+    ports:
+      - target: ${PORT}
+        published: 80
+    environment:
+      PORT: ${PORT}

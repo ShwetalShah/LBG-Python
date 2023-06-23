@@ -2,16 +2,22 @@ pipeline {
 	agent any
 	
 	environment {
-		version = "0"
+		version = "1"
 		PORT = "9000"
 	}
 
 	stages {
-		stage('build and run container') {
+		stage('build') {
 			steps {
-				sh 'bash < build.sh'
+				sh 'docker-compose build'
 			}
 		}
+		stage('run container') {
+                        steps {
+                                sh 'docker-compose up -d'
+                        }
+                }
+
 	}
 }
 
