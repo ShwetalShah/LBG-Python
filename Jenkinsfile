@@ -32,7 +32,7 @@ pipeline {
 	}
 	post {
 		always {
-			sh 'docker-compose down --rmi'
+			sh 'docker-compose down --rmi all'
 			cleanWs()
 		}
 	}
