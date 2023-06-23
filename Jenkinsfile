@@ -25,6 +25,7 @@ pipeline {
 				./venv/bin/activate
 				pip3 install -r requirements.txt
 				python3 lbg.test.py
+				behave ./features/restapp.feature
 				'''
 			}
 		}
