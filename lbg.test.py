@@ -4,13 +4,12 @@ Tests key functions and API routes in isolation from client-side user interface
 
 For full list of assertions available: https://docs.python.org/3.8/library/unittest.html
 """
-from os import getenv
 import unittest
 from lbg import item_builder
 from flask_api import status
 import requests
 
-PORT = int(getenv('PORT'))
+PORT = 80
 BASE_URL = f"http://localhost:{PORT}"
 
 class MyLbgApiTestCase(unittest.TestCase):
