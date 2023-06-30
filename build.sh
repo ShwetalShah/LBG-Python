@@ -1,8 +1,5 @@
 #!/bin/bash
 
-old_version=${version}
-((version++))
-
 if docker logs lbg-sample > /dev/null; then
 	if docker exec lbg-sample ls > /dev/null; then
 		docker stop lbg-sample
