@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lbg-python
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lbg-python
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+  template:
+    metadata:
+      labels:
+        app: lbg-python
+    spec:
+      containers:
+      - name: lbg-python
+        image: grc.io/ibg-mea-12/ss-python:sv1
+        ports:
+        - containerPort: 9000
+        env:
+        - name: PORT
+          value: "9000"
+
