@@ -2,21 +2,17 @@ pipeline {
 	agent any
 	
 	environment {
-		version = "v1"
+		version = "1"
 		PORT = "9000"
 	}
 
 	stages {
 		stage('build') {
 			steps {
-				sh 'docker-compose build'
+				sh 'sudo chmod +x build.sh scripts/*.sh'
+				sh './build.sh'
 			}
 		}
-		stage('run container') {
-                        steps {
-                                sh 'docker-compose up -d'
-                        }
-                }
 		stage('run unit tests') {
 			steps {
 				sh '''
@@ -25,16 +21,18 @@ pipeline {
 				./venv/bin/activate
 				pip3 install -r requirements.txt
 				python3 lbg.test.py
-    				docker-compose down
-				docker-compose up -d
-				python3 -m behave ./features/restapp.feature
 				'''
+			}
+		}
+		stage('push image') {
+			steps {
+				sh 'docker push gcr.io/lbg-mea-12/python-app:agray-v${version}'
 			}
 		}
 	}
 	post {
 		always {
-			sh 'docker-compose down --rmi all'
+			sh './scripts/cleanup.sh'
 			cleanWs()
 		}
 	}
