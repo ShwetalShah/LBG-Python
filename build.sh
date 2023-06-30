@@ -14,11 +14,11 @@ else
 	sleep 1
 fi
 
-if docker image history lbg-sample:v${old_version} > /dev/null; then
-	docker rmi lbg-sample:v${old_version}
+if docker image history gcr.io/lbg-mea-12/python-app:agray-v${old_version} > /dev/null; then
+	docker rmi gcr.io/lbg-mea-12/python-app:agray-v${old_version}
 else
 	sleep 1
 fi
 
-docker build -t lbg-sample:v${version} .
-docker run -d -p 80:${PORT} -e PORT=${PORT} --name lbg-sample lbg-sample:v${version}
+docker build -t gcr.io/lbg-mea-12/python-app:agray-v${version} .
+docker run -d -p 80:${PORT} -e PORT=${PORT} --name lbg-sample gcr.io/lbg-mea-12/python-app:agray-v${version}
